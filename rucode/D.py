@@ -1,40 +1,57 @@
 def solution():
     x, y, r = map(int, input().split())
 
-    colors = set()
+    if x == 0 and y == 0:
+        return 5
     
-    if abs(x) <= r or abs(y) <= r:
-        colors.add('black')
+    elif x > 0 and y > 0:
+        count = 1
+        if x - r <= 0 or y - r <= 0:
+            count += 1
+        if x - r < 0:
+            count += 1
+        if y - r < 0:
+            count += 1
+        if x ** 2 + y ** 2 < r ** 2:
+            count += 1
+        return count
     
-    dots = [
-        [x + r, y],
-        [x - r, y],
-        [x, y + r],
-        [x, y - r],
-        [x + r/2*(2**0.5), y + r/2*(2**0.5)],
-        [x + r/2*(2**0.5), y - r/2*(2**0.5)],
-        [x - r/2*(2**0.5), y + r/2*(2**0.5)],
-        [x - r/2*(2**0.5), y - r/2*(2**0.5)]
-    ]
-
-    for i in range(len(dots)):
-        points = dots[i]
-        x_p = points[0]
-        y_p = points[1]
-        if x_p > 0 and y_p > 0:
-            colors.add('gold')
+    elif x < 0 and y > 0:
+        count = 1
+        if x + r >= 0 or y - r <= 0:
+            count += 1
+        if x + r > 0:
+            count += 1
+        if y - r < 0:
+            count += 1
+        if x ** 2 + y ** 2 < r ** 2:
+            count += 1
+        return count
+    
+    elif x < 0 and y < 0:
+        count = 1
+        if x + r >= 0 or y + r >= 0:
+            count += 1
+        if x + r > 0:
+            count += 1
+        if y + r > 0:
+            count += 1
+        if x ** 2 + y ** 2 < r ** 2:
+            count += 1
+        return count
         
-        if x_p < 0 and y_p > 0:
-            colors.add('white')
-
-        if x_p < 0 and y_p < 0:
-            colors.add('blue')
-
-        if x_p > 0 and y_p < 0:
-            colors.add('red')
-        
-    return len(colors)
-
+    elif x > 0 and y < 0:
+        count = 1
+        if x - r <= 0 or y + r >= 0:
+            count += 1
+        if x - r < 0:
+            count += 1
+        if y + r > 0:
+            count += 1
+        if x ** 2 + y ** 2 < r ** 2:
+            count += 1
+        return count
+    
 
 if __name__ == '__main__':
     answer = solution()
